@@ -1,6 +1,8 @@
 bin = [
   { name = "2015_day_one_part_one", path = "practice/2015/day_one/part_one.rs" },
   { name = "2015_day_one_part_two", path = "practice/2015/day_one/part_two.rs" },
+  { name = "2015_day_two_part_one", path = "practice/2015/day_two/part_one.rs" },
+  { name = "2015_day_two_part_two", path = "practice/2015/day_two/part_two.rs" },
 ]
 
 [package]
