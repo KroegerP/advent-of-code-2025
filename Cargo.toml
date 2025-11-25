@@ -1,10 +1,13 @@
 bin = [
+  { name = "utils", path = "util/lib.rs" },
   { name = "2015_day_one_part_one", path = "practice/2015/day_one/part_one.rs" },
   { name = "2015_day_one_part_two", path = "practice/2015/day_one/part_two.rs" },
   { name = "2015_day_two_part_one", path = "practice/2015/day_two/part_one.rs" },
   { name = "2015_day_two_part_two", path = "practice/2015/day_two/part_two.rs" },
-  { name = "2015_day_day_three_part_one", path = "practice/2015/day_three/part_one.rs" },
-  { name = "2015_day_day_three_part_two", path = "practice/2015/day_three/part_two.rs" },
+  { name = "2015_day_three_part_one", path = "practice/2015/day_three/part_one.rs" },
+  { name = "2015_day_three_part_two", path = "practice/2015/day_three/part_two.rs" },
+  { name = "2023_10_1", path = "practice/2023/10/part_one.rs" },
+  { name = "2023_10_2", path = "practice/2023/10/part_two.rs" },
 ]
 
 [package]
@@ -38,3 +41,6 @@ infinite_loop = "deny"
 mem_forget = "deny"
 # Currently, there are no disallowed methods. This line avoids problems when developing Rustlings.
 disallowed_methods = "allow"
+
+[dependencies]
+reqwest = { version = "0.12.24", features = ["blocking"] }
