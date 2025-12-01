@@ -8,6 +8,8 @@ bin = [
   { name = "2015_day_three_part_two", path = "practice/2015/day_three/part_two.rs" },
   { name = "2023_10_1", path = "practice/2023/10/part_one.rs" },
   { name = "2023_10_2", path = "practice/2023/10/part_two.rs" },
+  { name = "2025_1_1", path = "2025/1/part_one.rs" },
+  { name = "2025_1_2", path = "2025/1/part_two.rs" },
 ]
 
 [package]
@@ -43,4 +45,4 @@ mem_forget = "deny"
 disallowed_methods = "allow"
 
 [dependencies]
-reqwest = { version = "0.12.24", features = ["blocking"] }
+utils = { path = "../utils" }
