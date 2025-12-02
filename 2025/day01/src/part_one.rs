@@ -10,7 +10,7 @@ fn get_clicks(rotation: &str) -> i32 {
     if dir == "R" { clicks } else { clicks * -1 }
 }
 
-fn main() {
+pub fn solve_part_one() {
     let mut current_position = 50;
 
     let mut zero_counter = 0;

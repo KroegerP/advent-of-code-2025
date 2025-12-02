@@ -1,48 +1,6 @@
-bin = [
-  { name = "utils", path = "util/lib.rs" },
-  { name = "2015_day_one_part_one", path = "practice/2015/day_one/part_one.rs" },
-  { name = "2015_day_one_part_two", path = "practice/2015/day_one/part_two.rs" },
-  { name = "2015_day_two_part_one", path = "practice/2015/day_two/part_one.rs" },
-  { name = "2015_day_two_part_two", path = "practice/2015/day_two/part_two.rs" },
-  { name = "2015_day_three_part_one", path = "practice/2015/day_three/part_one.rs" },
-  { name = "2015_day_three_part_two", path = "practice/2015/day_three/part_two.rs" },
-  { name = "2023_10_1", path = "practice/2023/10/part_one.rs" },
-  { name = "2023_10_2", path = "practice/2023/10/part_two.rs" },
-  { name = "2025_1_1", path = "2025/1/part_one.rs" },
-  { name = "2025_1_2", path = "2025/1/part_two.rs" },
-]
+[workspace]
+members = ["2025/*", "utils"]
+resolver = "3"
 
-[package]
-name = "advent-of-code-2025"
-edition = "2024"
-# Don't publish the exercises on crates.io!
-publish = false
-
-[profile.release]
-panic = "abort"
-
-[profile.dev]
-panic = "abort"
-
-[lints.rust]
-# You shouldn't write unsafe code in Rustlings!
-unsafe_code = "forbid"
-# You don't need unstable features in Rustlings and shouldn't rely on them while learning Rust.
-unstable_features = "forbid"
-# Dead code warnings can't be avoided in some exercises and might distract while learning.
-dead_code = "allow"
-
-[lints.clippy]
-# You forgot a `todo!()`!
-todo = "forbid"
-# This can only happen by mistake in Rustlings.
-empty_loop = "forbid"
-# No infinite loops are needed in Rustlings.
-infinite_loop = "deny"
-# You shouldn't leak memory while still learning Rust!
-mem_forget = "deny"
-# Currently, there are no disallowed methods. This line avoids problems when developing Rustlings.
-disallowed_methods = "allow"
-
-[dependencies]
-utils = { path = "./utils" }
+[cargo-new]
+vcs = "none"

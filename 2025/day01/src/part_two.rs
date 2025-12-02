@@ -1,5 +1,3 @@
-use utils::get_input;
-
 fn get_clicks(cur_pos: i32, rotation: &str) -> (i32, i32) {
     let (dir, count) = rotation.split_at(1);
 
@@ -30,7 +28,7 @@ fn get_clicks(cur_pos: i32, rotation: &str) -> (i32, i32) {
     (new_position, zero_count)
 }
 
-fn solve_part_two(input: String) {
+pub fn solve_part_two(input: String) {
     let mut current_position = 50;
 
     let mut zero_counter = 0;
@@ -43,10 +41,4 @@ fn solve_part_two(input: String) {
     });
 
     println!("Went to zero {} times", zero_counter);
-}
-
-fn main() {
-    let data = get_input(2025, 1);
-
-    solve_part_two(data);
 }
