@@ -1,4 +1,4 @@
-const DATA: &str = include_str!("input.txt");
+use utils::get_input;
 
 fn get_clicks(cur_pos: i32, rotation: &str) -> (i32, i32) {
     let (dir, count) = rotation.split_at(1);
@@ -12,7 +12,7 @@ fn get_clicks(cur_pos: i32, rotation: &str) -> (i32, i32) {
         "R" => {
             new_position = new_position + clicks;
             zero_count += new_position / 100;
-            new_position = new_position.rem_euclid(100);
+            new_position = (new_position % 100).abs();
         }
         "L" => {
             new_position = new_position - clicks;
@@ -22,7 +22,7 @@ fn get_clicks(cur_pos: i32, rotation: &str) -> (i32, i32) {
             if cur_pos == 0 {
                 zero_count -= 1;
             }
-            new_position = new_position.rem_euclid(100);
+            new_position = (new_position % 100 + 100) % 100;
         }
         _other => unreachable!(),
     }
@@ -30,12 +30,12 @@ fn get_clicks(cur_pos: i32, rotation: &str) -> (i32, i32) {
     (new_position, zero_count)
 }
 
-fn main() {
+fn solve_part_two(input: String) {
     let mut current_position = 50;
 
     let mut zero_counter = 0;
 
-    DATA.split_whitespace().for_each(|f| {
+    input.split_whitespace().for_each(|f| {
         let (new_position, zeros_count) = get_clicks(current_position, f);
 
         current_position = new_position;
@@ -43,4 +43,10 @@ fn main() {
     });
 
     println!("Went to zero {} times", zero_counter);
+}
+
+fn main() {
+    let data = get_input(2025, 1);
+
+    solve_part_two(data);
 }
