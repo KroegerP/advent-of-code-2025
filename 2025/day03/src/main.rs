@@ -12,7 +12,10 @@ fn main() {
 
     let data = include_str!("test.txt");
 
-    let ans: u64 = part_two::solve_part_two(&data);
+    let ans: u64 = part_two::solve_part_two(&input);
+
+    // 16882670420197 too low
+    // 168680094117407 too low
 
     println!("{}", ans);
 }
