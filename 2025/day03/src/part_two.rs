@@ -5,40 +5,31 @@ fn concat_numbers(nums: &[u32]) -> u64 {
     })
 }
 
-fn initialize_acc(input: &str, n: usize) -> Vec<u32> {
+fn initialize_acc(input: &str, n: usize) -> (u32, &str) {
     let range_1 = input.split_at(input.len() - n);
 
     let max_1 = range_1.0.chars().max().unwrap();
 
     let max_1_idx = input.find(max_1).unwrap();
 
-    println!("Max Value {max_1}");
-
     let range_2 = input.split_at(max_1_idx + 1);
 
-    let mut vec_range: Vec<u32> = range_2.1.chars().map(|f| f.to_digit(10).unwrap()).collect();
-
-    vec_range.insert(0, max_1.to_digit(10).unwrap());
-
-    vec_range
+    (max_1.to_digit(10).unwrap(), range_2.1)
 }
 
 fn max_n_numbers(input: &str, n: usize) -> u64 {
-    let mut acc = initialize_acc(input, n);
+    let mut acc: Vec<u32> = vec![];
 
-    while acc.len() > n {
-        let min = acc.iter().min().unwrap();
+    let mut new_search = input;
 
-        let position = acc.iter().position(|v| v == min).unwrap();
+    while acc.len() < n {
+        let (max_val, new_search_str) = initialize_acc(new_search, n - acc.len() - 1);
 
-        acc.remove(position);
+        acc.push(max_val);
+        new_search = new_search_str;
     }
 
-    let res = concat_numbers(&acc);
-
-    println!("{res}");
-
-    res
+    concat_numbers(&acc)
 }
 
 pub fn solve_part_two(input: &str) -> u64 {
