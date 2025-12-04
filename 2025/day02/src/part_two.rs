@@ -10,14 +10,15 @@ fn find_invalids(f_id: u64, l_id: u64) -> Vec<u64> {
             let mut is_valid = true;
 
             let mut index = 0;
-            let end_idx = if f_size % 2 == 0 {
+
+            let middle_idx = if f_size % 2 == 0 {
                 f_size / 2
             } else {
                 f_size / 2 + 1
             };
 
-            while index < end_idx {
-                if f_string.chars().nth(index) != f_string.chars().nth(index + end_idx) {
+            while index < middle_idx {
+                if f_string.chars().nth(index) != f_string.chars().nth(index + middle_idx) {
                     is_valid = false;
                     break;
                 }
@@ -32,7 +33,7 @@ fn find_invalids(f_id: u64, l_id: u64) -> Vec<u64> {
     return invalid_ids;
 }
 
-pub fn part_one(input_data: &str) -> u64 {
+pub fn part_two(input_data: &str) -> u64 {
     let mut sum_of_invalids: u64 = 0;
 
     input_data
