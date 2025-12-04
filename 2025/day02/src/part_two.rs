@@ -1,32 +1,42 @@
 use crate::common;
 
+fn get_pattern_size(input_data: &str) -> isize {
+    let (first_digit, rest) = input_data.split_at(1);
+
+    let next_matching_idx = rest.chars().position(|c| c.to_string() == first_digit);
+
+    let position: isize = match next_matching_idx {
+        Some(u) => u as isize,
+        None => -2,
+    };
+
+    position + 1
+}
+
 fn find_invalids(f_id: u64, l_id: u64) -> Vec<u64> {
     let num_range = f_id..l_id + 1;
 
     let invalid_ids: Vec<u64> = num_range
         .filter(|&f| {
             let f_string = f.to_string();
-            let f_size = f_string.len();
-            let mut is_valid = true;
+            let pattern_size = get_pattern_size(&f_string);
 
-            let mut index = 0;
-
-            let middle_idx = if f_size % 2 == 0 {
-                f_size / 2
-            } else {
-                f_size / 2 + 1
-            };
-
-            while index < middle_idx {
-                if f_string.chars().nth(index) != f_string.chars().nth(index + middle_idx) {
-                    is_valid = false;
-                    break;
-                }
-
-                index += 1;
+            if pattern_size < 0 {
+                return false;
             }
 
-            is_valid
+            let str_vect: Vec<char> = f_string.chars().collect();
+
+            let mut chunks = str_vect.chunks(pattern_size as usize);
+
+            if let Some(first_chunk) = chunks.next() {
+                // Check if all remaining chunks are equal to the first one
+                let res = chunks.all(|chunk| chunk == first_chunk);
+
+                res
+            } else {
+                false
+            }
         })
         .collect();
 
@@ -40,9 +50,13 @@ pub fn part_two(input_data: &str) -> u64 {
         .split(",")
         .map(common::str_to_num_range)
         .for_each(|(f_id, l_id)| {
-            let invalid_nums: u64 = find_invalids(f_id, l_id).iter().sum();
+            let invalid_nums_vec = find_invalids(f_id, l_id);
 
-            sum_of_invalids += invalid_nums;
+            println!("{}-{} {:?}", f_id, l_id, invalid_nums_vec);
+
+            let res: u64 = invalid_nums_vec.iter().sum();
+
+            sum_of_invalids += res;
         });
 
     sum_of_invalids
